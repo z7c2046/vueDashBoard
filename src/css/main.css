@@ -1,0 +1,149 @@
+:root {
+    --backGroundColor: white;
+    --divBackGroundColor: #ececec;
+    --corlor1: #03e380;
+    --corlor2: #2c90ff;
+    --corlor3: #000000;
+    --standWidth: 90px;
+    --standHeight: 90px;
+    --accountColor: #1d1d1f;
+    --green-font: #00A341;
+    --gradLinear: linear-gradient(45deg, #f37d42, #9846ec, #54b4e7);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--backGroundColor);
+    width: 93vw;
+    height: 84vh;
+    padding: 50px;
+}
+
+.mainBox {
+    width: 99%;
+    height: 100%;
+    padding: 10px;
+    border: 2px solid var(--corlor3);
+    display: grid;
+    gap: 0 20px;
+    grid-template-areas:
+        "darkMode darkMode refresh refresh more more feature feature feature feature feature feature feature feature brag brag brag brag brag brag"
+        "darkMode darkMode refresh refresh more more feature feature feature feature feature feature feature feature brag brag brag brag brag brag"
+        "histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 profile profile profile profile profile profile profile profile uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed "
+        "histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 profile profile profile profile profile profile profile profile uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed "
+        "histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 profile profile profile profile profile profile profile profile uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed "
+        "histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 profile profile profile profile profile profile profile profile downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed"
+        "histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 profile profile profile profile profile profile profile profile downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed"
+        "histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 profile profile profile profile profile profile profile profile downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed"
+        "pieChart pieChart pieChart pieChart pieChart pieChart profile profile profile profile profile profile profile profile  CPU_usage CPU_usage  CPU_usage  Memory_usage Memory_usage Memory_usage"
+        "pieChart pieChart pieChart pieChart pieChart pieChart profile profile profile profile profile profile profile profile  CPU_usage CPU_usage  CPU_usage  Memory_usage Memory_usage Memory_usage"
+        "pieChart pieChart pieChart pieChart pieChart pieChart summary summary summary summary summary summary summary summary CPU_usage CPU_usage  CPU_usage Memory_usage Memory_usage Memory_usage"
+        "pieChart pieChart pieChart pieChart pieChart pieChart summary summary summary summary summary summary summary summary CPU_usage CPU_usage  CPU_usage Memory_usage Memory_usage Memory_usage";
+    align-content: space-evenly;
+}
+
+.mainBox>div {
+    /* width: var(--standWidth);
+    height: var(--standHeight);
+    稍后单独指定 */
+    /* padding: 5px; */
+    background-color: var(--divBackGroundColor);
+    color: var(--corlor3);
+    border: 1px solid var(--corlor3);
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    transition: filter .5s;
+}
+
+.mainBox>div:hover {
+    filter: brightness(70%);
+}
+
+/* .mainBox .darkMode,
+.mainBox .refresh,
+.mainBox .more,
+.mainBox .CPU_usage,
+.mainBox .brag {
+    width: var(--standWidth);
+    height: var(--standHeight);
+} */
+
+.mainBox img {
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+}
+
+
+.mainBox .feature h1 {
+    background: var(--gradLinear);
+    font-size: 3em;
+    background-clip: text;
+    -webkit-background-clip: text;
+    /* 将文本设置为背景裁剪 */
+    color: transparent;
+    /* 让文本颜色透明，让背景显示出来 */
+}
+
+.mainBox .brag h1 {
+    color: var(--green-font);
+}
+
+/* 黑暗模式 */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --backGroundColor: rgba(52, 53, 65, 1);
+        --text-color: white;
+        --divBackGroundColor: #1d1d1f;
+    }
+}
+
+/* 移动端适配 */
+@media screen and(max-width: 400px) {
+    .mainBox {
+        grid-template-areas:
+            "profile profile profile profile profile profile profile profile profile profile profile profile"
+            "profile profile profile profile profile profile profile profile profile profile profile profile"
+            "profile profile profile profile profile profile profile profile profile profile profile profile"
+            "profile profile profile profile profile profile profile profile profile profile profile profile"
+            "profile profile profile profile profile profile profile profile profile profile profile profile"
+            "profile profile profile profile profile profile profile profile profile profile profile profile"
+            "profile profile profile profile profile profile profile profile profile profile profile profile"
+            "profile profile profile profile profile profile profile profile profile profile profile profile"
+            "darkMode darkMode darkMode darkMode refresh refresh refresh refresh more more more more"
+            "darkMode darkMode darkMode darkMode refresh refresh refresh refresh more more more more"
+            "feature feature feature feature feature feature feature feature feature feature feature feature "
+            "feature feature feature feature feature feature feature feature feature feature feature feature "
+            "histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1"
+            "histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1"
+            "histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1"
+            "histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2"
+            "histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2"
+            "histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2"
+            "pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart"
+            "pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart"
+            "pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart"
+            "pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart"
+            "summary summary summary summary summary summary summary summary summary summary summary summary"
+            "summary summary summary summary summary summary summary summary summary summary summary summary"
+            "brag brag brag brag brag brag brag brag brag brag brag brag"
+            "brag brag brag brag brag brag brag brag brag brag brag brag"
+            "uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed"
+            "uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed"
+            "uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed"
+            "downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed"
+            "downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed"
+            "downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed"
+            "CPU_usage CPU_usage CPU_usage CPU_usage CPU_usage CPU_usage  Memory_usage Memory_usage Memory_usage Memory_usage Memory_usage Memory_usage"
+            "CPU_usage CPU_usage CPU_usage CPU_usage CPU_usage CPU_usage  Memory_usage Memory_usage Memory_usage Memory_usage Memory_usage Memory_usage"
+            "CPU_usage CPU_usage CPU_usage CPU_usage CPU_usage CPU_usage  Memory_usage Memory_usage Memory_usage Memory_usage Memory_usage Memory_usage"
+            "CPU_usage CPU_usage CPU_usage CPU_usage CPU_usage CPU_usage  Memory_usage Memory_usage Memory_usage Memory_usage Memory_usage Memory_usage";
+        align-content: space-evenly;
+    }
+}

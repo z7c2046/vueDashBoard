@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&display=swap');
+
+.profile div {
+  position: relative;
+}
+
+.profile div svg {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
+#tick {
+  stroke-dasharray: 210px;
+  stroke-dashoffset: 210px;
+  animation: 3s tick ease-in-out infinite;
+}
+
+@keyframes tick {
+
+  0%,
+  50% {
+    stroke-dashoffset: 210px;
+  }
+
+  50%,
+  100% {
+    stroke-dashoffset: 0px;
+  }
+}

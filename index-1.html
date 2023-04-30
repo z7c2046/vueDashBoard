@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>基于VUE的大数据可视化系统</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+        :root {
+            --backGroundColor: white;
+            --divBackGroundColor: #ececec;
+            --corlor1: #03e380;
+            --corlor2: #2c90ff;
+            --corlor3: #000000;
+            --standWidth: 150px;
+            --standHeight: 150px;
+            --accountColor: #1d1d1f;
+            --green-font: #00A341;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--backGroundColor);
+        }
+
+        .mainBox {
+            width: 59vw;
+            height: 99vh;
+            border: 2px solid var(--corlor3);
+            padding: 0 20%;
+            display: grid;
+            /* 内部元素 */
+            /* justify-items: center; */
+            /* 外部轨道 -- 指父级元素的那个框*/
+            gap: 20px;
+            grid-template-areas:
+                "profile moudle1 moudle1"
+                "moudle2 moudle2 moudle3"
+                "moudle6 moudle7 moudle8";
+            align-content: center;
+            justify-content: center;
+        }
+
+        .mainBox>div {
+            width: var(--standWidth);
+            /* height: var(--standHeight); */
+            /* 单独指定 */
+            background-color: var(--divBackGroundColor);
+            color: var(--corlor3);
+            border: 2px solid var(--corlor3);
+            border-radius: 20px;
+        }
+
+        .mainBox .profile {
+            height: calc(var(--standHeight));
+        }
+
+        .mainBox .profile .profileImage {
+            height: 50%;
+        }
+
+        .mainBox .profile .nickName {
+            height: 20%;
+        }
+
+        .mainBox .profile .account {
+            height: 10%;
+        }
+
+        .mainBox .profile .slogan {
+            height: 20%;
+        }
+
+        .mainBox .profile .profileImage img {
+            width: 50%;
+            border-radius: 100%;
+        }
+
+        .mainBox .profile .account {
+            color: var(--accountColor);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mainBox" id="mainBox">
+        <!-- <div class="profile">
+            <div class="profileImage">
+                <img :src="visibilityData.profile.img">
+            </div>
+            <div class="nickName">
+                <h2>{{visibilityData.profile.name}}</h2>
+            </div>
+            <div class="account">
+                <h4>{{visibilityData.profile.account}}</h4>
+            </div>
+            <div class="slogan">
+                <h3>{{visibilityData.profile.slogan}}</h3>
+            </div>
+        </div>
+        <div class="module">1</div>
+        <div class="module">2</div>
+        <div class="module">3</div>
+        <div class="module">4</div>
+        <div class="module">5</div>
+        <div class="module">6</div>
+        <div class="module">7</div>
+        <div class="module">8</div>
+        <div class="module">9</div>
+        <div class="module">10</div>
+        <div class="module">11</div>
+        <div class="module">12</div>
+        <div class="module">13</div>
+        <div class="module">14</div> -->
+        <template v-for="key in visibilityData>
+
+        </template>
+    </div>
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    visibilityData: {
+                        darkModde: {},
+                        switch1: {},
+                        switch2: {},
+                        histogram1: {},
+                        histogram2: {},
+                        pieChart: {},
+                        CPU_usage: {},
+                        profile: {
+                            name: " 煮个面都得β", img: "assets/images/profileImages.jpg" , account: "test89034@mail.com" ,
+            slogan: "VUE可视化系统" }, // Memory_usage: {}, summary: { }, brag: {}, uploadSpeed: {}, downloadSpeed: {},
+            feature1: {}, feature2: {} } } } }).mount('#mainBox') </script>
+</body>
+
+</html>

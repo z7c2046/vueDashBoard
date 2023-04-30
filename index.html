@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>基于VUE的大数据可视化系统</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
+    <script src="https://unpkg.com/@antv/g2@next/dist/g2.min.js"></script>
+    <!-- <link rel="stylesheet" href="src/css/main.css"> -->
+    <link rel="stylesheet" href="/src/css/smile.css">
+    <style>
+        :root {
+            --backGroundColor: #f5f5f7;
+            --divBackGroundColor: #ececec;
+            --fontColor: #000;
+            --greenCorlor1: #03e380;
+            --theScendGreenColor: #6DC781;
+            --corlor2: #2c90ff;
+            --standWidth: 90px;
+            --standHeight: 90px;
+            --accountColor: #1d1d1f;
+            --green-font: #00A341;
+            --gradLinear: linear-gradient(45deg, #f37d42, #9846ec, #54b4e7);
+            --gradlinear1: linear-gradient(90deg, #5438d1, #8938d1 60%);
+            --gradlinear2: linear-gradient(90deg, #ae41c5, #df51ad 60%);
+            --gradlinear3: linear-gradient(90deg, #df51ad, #eb587d 90%);
+            --gradlinear4: linear-gradient(90deg, #ec597f, #e4551a 90%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--backGroundColor);
+            color: var(--fontColor);
+            width: 93vw;
+            height: 84vh;
+            padding: 50px;
+        }
+
+        .mainBox {
+            width: 99%;
+            height: 100%;
+            padding: 10px;
+            /* border: 2px solid var(--corlor3); */
+            display: grid;
+            gap: 0 20px;
+            grid-template-areas:
+                "darkMode darkMode refresh refresh more more feature feature feature feature feature feature feature feature brag brag brag brag brag brag"
+                "darkMode darkMode refresh refresh more more feature feature feature feature feature feature feature feature brag brag brag brag brag brag"
+                "histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 profile profile profile profile profile profile profile profile uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed "
+                "histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 profile profile profile profile profile profile profile profile uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed "
+                "histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 profile profile profile profile profile profile profile profile uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed "
+                "histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 profile profile profile profile profile profile profile profile downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed"
+                "histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 profile profile profile profile profile profile profile profile downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed"
+                "histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 profile profile profile profile profile profile profile profile downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed"
+                "pieChart pieChart pieChart pieChart pieChart pieChart profile profile profile profile profile profile profile profile  CPU_usage CPU_usage  CPU_usage  Memory_usage Memory_usage Memory_usage"
+                "pieChart pieChart pieChart pieChart pieChart pieChart profile profile profile profile profile profile profile profile  CPU_usage CPU_usage  CPU_usage  Memory_usage Memory_usage Memory_usage"
+                "pieChart pieChart pieChart pieChart pieChart pieChart summary summary summary summary summary summary summary summary CPU_usage CPU_usage  CPU_usage Memory_usage Memory_usage Memory_usage"
+                "pieChart pieChart pieChart pieChart pieChart pieChart summary summary summary summary summary summary summary summary CPU_usage CPU_usage  CPU_usage Memory_usage Memory_usage Memory_usage";
+            align-content: space-evenly;
+        }
+
+        .mainBox>div {
+            /* padding: 5px; */
+            background-color: var(--divBackGroundColor);
+            color: var(--fontColor);
+            /* border: 1px solid var(--corlor3); */
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            border-radius: 20px;
+            transition: filter .5s;
+        }
+
+        .mainBox .feature h1 {
+            background: var(--gradLinear);
+        }
+
+        .mainBox .histogram1 h1 {
+            background: var(--gradlinear1);
+
+        }
+
+        .mainBox .histogram2 h1 {
+            background: var(--gradlinear3);
+        }
+
+        .mainBox .uploadSpeed h1 {
+            background: var(--gradlinear2);
+        }
+
+        .mainBox .downloadSpeed h1 {
+            background: var(--gradlinear4);
+        }
+
+        .mainBox .feature h1,
+        .mainBox .histogram1 h1,
+        .mainBox .histogram2 h1,
+        .mainBox .uploadSpeed h1,
+        .mainBox .downloadSpeed h1 {
+            font-size: 2em;
+            background-clip: text;
+            -webkit-background-clip: text;
+            /* 将文本设置为背景裁剪 */
+            color: transparent;
+            /* 让文本颜色透明，让背景显示出来 */
+        }
+
+        .mainBox div img {
+            width: 80px;
+            height: 80px;
+            cursor: pointer;
+        }
+
+        .mainBox .brag h1 {
+            color: var(--green-font);
+        }
+
+        /* 黑暗模式 */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --fontColor: #fff;
+                --backGroundColor: rgba(52, 53, 65, 1);
+                --text-color: white;
+                --divBackGroundColor: #1d1d1f;
+            }
+        }
+
+        /* 移动端适配 */
+        @media screen and (max-width: 400px) {
+            body {
+                width: 100vw;
+                height: 100vh;
+            }
+
+            .mainBox {
+                width: 100%;
+                height: 100%;
+                padding: 10px 0;
+                row-gap: 4px;
+                grid-template-areas:
+                    "profile profile profile profile profile profile profile profile profile profile profile profile"
+                    "profile profile profile profile profile profile profile profile profile profile profile profile"
+                    "profile profile profile profile profile profile profile profile profile profile profile profile"
+                    "profile profile profile profile profile profile profile profile profile profile profile profile"
+                    "profile profile profile profile profile profile profile profile profile profile profile profile"
+                    "profile profile profile profile profile profile profile profile profile profile profile profile"
+                    "profile profile profile profile profile profile profile profile profile profile profile profile"
+                    "profile profile profile profile profile profile profile profile profile profile profile profile"
+                    "darkMode darkMode darkMode darkMode refresh refresh refresh refresh more more more more"
+                    "darkMode darkMode darkMode darkMode refresh refresh refresh refresh more more more more"
+                    "feature feature feature feature feature feature feature feature feature feature feature feature "
+                    "feature feature feature feature feature feature feature feature feature feature feature feature "
+                    "histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1"
+                    "histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1"
+                    "histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1 histogram1"
+                    "histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2"
+                    "histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2"
+                    "histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2 histogram2"
+                    "pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart"
+                    "pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart"
+                    "pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart"
+                    "pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart pieChart"
+                    "summary summary summary summary summary summary summary summary summary summary summary summary"
+                    "summary summary summary summary summary summary summary summary summary summary summary summary"
+                    "brag brag brag brag brag brag brag brag brag brag brag brag"
+                    "brag brag brag brag brag brag brag brag brag brag brag brag"
+                    "uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed"
+                    "uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed"
+                    "uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed uploadSpeed"
+                    "downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed"
+                    "downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed"
+                    "downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed downloadSpeed"
+                    "CPU_usage CPU_usage CPU_usage CPU_usage CPU_usage CPU_usage  Memory_usage Memory_usage Memory_usage Memory_usage Memory_usage Memory_usage"
+                    "CPU_usage CPU_usage CPU_usage CPU_usage CPU_usage CPU_usage  Memory_usage Memory_usage Memory_usage Memory_usage Memory_usage Memory_usage"
+                    "CPU_usage CPU_usage CPU_usage CPU_usage CPU_usage CPU_usage  Memory_usage Memory_usage Memory_usage Memory_usage Memory_usage Memory_usage"
+                    "CPU_usage CPU_usage CPU_usage CPU_usage CPU_usage CPU_usage  Memory_usage Memory_usage Memory_usage Memory_usage Memory_usage Memory_usage";
+                align-content: space-evenly;
+            }
+        }
+
+        @media (any-hover: hover) {
+            .mainBox>div:hover {
+                filter: brightness(70%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mainBox" id="mainBox">
+        <div v-for="(item, key) in visibilityData" :key="key" :id="key" :class="key"
+            :style="{ 'grid-area': item.area }">
+            <h1 v-if="item.name">{{item.name}}</h1>
+            <img :src="item.logo" v-if="item.logo">
+            <div v-html="item.svgImage"></div>
+        </div>
+    </div>
+
+
+    <script src="src\js\main.js"></script>
+    <!-- <script src="src\js\histogram1.js"></script> -->
+    <script src="src\js\pieChart.js"></script>
+    <script src="src\js\CPU_usage.js"></script>
+    <script src="src\js\MEMORY_usage.js"></script>
+</body>
+
+</html>
